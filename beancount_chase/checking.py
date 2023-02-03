@@ -91,8 +91,9 @@ class CheckingImporter(importer.ImporterProtocol):
                          meta=None)
         ]
         for pattern, account_name in self._account_patterns:
-            if pattern.search(payee) or pattern.search(
-                    narration) or pattern.search(payee + narration):
+            if (payee is not None and pattern.search(payee)) or \
+               pattern.search(narration) or \
+               (payee is not None and pattern.search(payee + narration)):
                 postings.append(
                     data.Posting(account=account_name,
                                  units=-transaction_amount,
