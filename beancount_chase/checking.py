@@ -69,7 +69,8 @@ class CheckingImporter(importer.ImporterProtocol):
         if payee:
             payee = titlecase.titlecase(payee)
         else:
-            raise ValueError(f'failed to parse {row[_COLUMN_PAYEE]}')
+            payee = None
+            transaction_description = row[_COLUMN_PAYEE]
         if transaction_description:
             narration = titlecase.titlecase(transaction_description)
         if row[_COLUMN_AMOUNT]:
